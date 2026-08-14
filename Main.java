@@ -1,8 +1,14 @@
 import java.util.Scanner;
 
 public class Main   {
+
+        public static void greetUser() {
+        System.out.println("Welcome to my Java program!");
+    }
     public static void main(String[] args)  {
         Scanner scanner = new Scanner(System.in);
+
+        greetUser();
 
         while(true){
             System.out.println("How old are you?");
