@@ -53,4 +53,8 @@ public class Person {
             return person.name + " is older than " + name;
         }
     }
+
+    public String compareBirthYear(Person person) {
+
+    }
 }
