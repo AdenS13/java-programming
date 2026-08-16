@@ -19,4 +19,8 @@ public class Employee {
     public String introduce() {
         return "Hi, I'm " + name + " and I make $" + salary + " an hour!";
     }
+
+    public int raiseTime(int raise) {
+        return salary += raise;
+    }
 }
