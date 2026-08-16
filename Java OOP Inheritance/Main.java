@@ -96,7 +96,7 @@ public class Main {
 
         for(Employee employee : employees) {
             if(employee.getSalary() <= avgSalary2) {
-
+                lowestPaid = employee.getSalary();
                 if()
             }
         }
