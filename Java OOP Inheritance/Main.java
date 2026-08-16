@@ -10,18 +10,21 @@ public class Main {
         Manager jeffM = new Manager("Jewf", 46, 6);
 
         int totalSalary = 0;
-        int tempSalary = 0;
+        double tempSalary = 0;
         double totalSalary2 = 0;
         double avgSalary2 = 0;
         double totalSalary3 = 0;
         double avgSalary3 = 0;
         Employee highestPaid = null;
-        String searchName = "Joe";
+        String searchName = "Aden";
         boolean found = false;
         boolean found2 = false;
         String luckyLad = "Sarah";
         int hugeRaise = 1000;
-        int lowestPaid = 0;
+        Employee lowestPaid = null;
+        double salaryInc = 0;
+        Employee foundEmp = null;
+        
 
         ArrayList<Employee> employees = new ArrayList<>();
 
@@ -95,10 +98,50 @@ public class Main {
 
 
         for(Employee employee : employees) {
-            if(employee.getSalary() <= avgSalary2) {
-                lowestPaid = employee.getSalary();
-                if()
+            if(lowestPaid == null)  {
+                lowestPaid = employee;
+            } else if(employee.getSalary() < lowestPaid.getSalary()) {
+                lowestPaid = employee;
             }
+        }
+
+        System.out.println(lowestPaid.getName() + " makes very little aka $" + lowestPaid.getSalary());
+
+            for(Employee employee : employees) {
+                if(avgSalary2 > employee.getSalary()) {
+                    System.out.println(employee.getName() + " gets a 10% raise. While currently at $" + employee.getSalary() + " an hour.");
+                    employee.setSalary(employee.getSalary() * 1.10);
+                    System.out.println(employee.getName() + " now makes $" + employee.getSalary() + " an hour.");
+            } else {
+                    System.out.println(employee.getName() + " gets a 5% raise. While currently at $" + employee.getSalary() + " an hour.");
+                    employee.setSalary(employee.getSalary() * 1.05);
+                    System.out.println(employee.getName() + " now makes $" + employee.getSalary() + " an hour.");
+            }
+        }
+
+        for(Employee employee : employees) {
+            avgSalary3 += employee.getSalary();
+        }
+
+        avgSalary3 = avgSalary3 / employees.size();
+
+        salaryInc = avgSalary3 - avgSalary2;
+
+        System.out.println("Old company average: $" + avgSalary2);
+        System.out.println("New company average: $" + avgSalary3);
+        System.out.println("Average increased by: $" + salaryInc);
+
+        for(Employee employee : employees) {
+            if(employee.getName().equals(searchName)) {
+                foundEmp = employee;
+                break;
+            }
+        }
+
+        if(foundEmp == null) {
+            System.out.println("Employee not found.");
+        } else {
+            System.out.println(foundEmp.getName() + " makes $" + foundEmp.getSalary() + "/hour.");
         }
     }
 }

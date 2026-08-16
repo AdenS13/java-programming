@@ -1,10 +1,14 @@
 public class Employee {
 
     private String name;
-    private int salary;
+    private double salary;
 
-    public Employee(String name, int salary) {
+    public Employee(String name, double salary) {
         this.name = name;
+        this.salary = salary;
+    }
+
+    public void setSalary(double salary) {
         this.salary = salary;
     }
 
@@ -12,7 +16,7 @@ public class Employee {
         return name;
     }
 
-    public int getSalary() {
+    public double getSalary() {
         return salary;
     }
 
@@ -20,7 +24,7 @@ public class Employee {
         return "Hi, I'm " + name + " and I make $" + salary + " an hour!";
     }
 
-    public int raiseTime(int raise) {
+    public double raiseTime(double raise) {
         return salary += raise;
     }
 }
