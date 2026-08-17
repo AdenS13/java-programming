@@ -9,6 +9,8 @@ public class Main {
         Manager destM = new Manager("Destiny", 37, 52);
         Manager jeffM = new Manager("Jewf", 46, 6);
 
+        ArrayList<Employee> employees = new ArrayList<>();
+
         int totalSalary = 0;
         double tempSalary = 0;
         double totalSalary2 = 0;
@@ -24,9 +26,14 @@ public class Main {
         Employee lowestPaid = null;
         double salaryInc = 0;
         Employee foundEmp = null;
+        int highAverage = 0;
+        double closeAverageHigh = 0;
+        double closeAverageLow = 0;
+        Employee closeAverage = null;
+        double finalCloseAverage = 0;
+
         
 
-        ArrayList<Employee> employees = new ArrayList<>();
 
         employees.add(adenD);
         employees.add(gravyD);
@@ -129,7 +136,7 @@ public class Main {
 
         System.out.println("Old company average: $" + avgSalary2);
         System.out.println("New company average: $" + avgSalary3);
-        System.out.println("Average increased by: $" + salaryInc);
+        System.out.printf("Average increased by: $%.2f%n", salaryInc);
 
         for(Employee employee : employees) {
             if(employee.getName().equals(searchName)) {
@@ -143,5 +150,30 @@ public class Main {
         } else {
             System.out.println(foundEmp.getName() + " makes $" + foundEmp.getSalary() + "/hour.");
         }
+
+        for(Employee employee : employees) {
+            if(employee.getSalary() > avgSalary3) {
+                highAverage++;
+            }
+        }
+
+        System.out.println(highAverage + " out of " + employees.size() + " make above the company average.");
+        System.out.println("That's " + (double) highAverage / employees.size() * 100 + "% of the company.");
+
+        for(Employee employee : employees) {
+            if(employee.getSalary() >= avgSalary3) {
+                closeAverageHigh = employee.getSalary() - avgSalary3;
+            } else {
+                closeAverageLow = avgSalary3 - employee.getSalary();
+            }
+            if(closeAverage == null) {
+                closeAverage = employee;
+            }
+        }
+
+        System.out.println(closeAverage + " is closest to the company average.");
+        System.out.println("Salary: $" + closeAverage.getSalary());
+        System.out.println("Difference: $" + finalCloseAverage);
+
     }
 }
