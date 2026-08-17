@@ -26,6 +26,8 @@ public class Main {
         double totalHighestValue = 0;
         Product needsRestock = null;
         double priorityScore = 0;
+        Product discountedProduct = null;
+        double invValue = 0;
 
         for(Product product : inventory) {
             System.out.println(product.getName() + " - $" + product.getPrice() + " - " + product.getQuantity() + " in stock");
@@ -117,6 +119,25 @@ public class Main {
         System.out.println("Highest restock priority: " + needsRestock.getName());
         System.out.println("Quantity: " + needsRestock.getQuantity());
         System.out.println("Priority score: " + priorityScore);
+
+        for(Product product : inventory) {
+            double currentValue = product.getQuantity() * product.getPrice();
+            if(product.getQuantity() > 5 && product.getPrice() >= 20) {   
+                if(currentValue > invValue) {
+                    discountedProduct = product;
+                    invValue = currentValue;
+                }
+            }
+        }
+
+        if(discountedProduct == null) {
+            System.out.println("No products qualify for clearance.");
+        } else {
+            System.out.println("CLEARANCE PRODUCT: " + discountedProduct.getName());
+            System.out.println("Price: $" + discountedProduct.getPrice());
+            System.out.println("Quantity: " + discountedProduct.getQuantity());
+            System.out.printf("Inventory value: $%.2f%n", invValue);
+        }
 
     }
 }
