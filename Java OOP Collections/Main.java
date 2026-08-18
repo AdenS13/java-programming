@@ -196,5 +196,9 @@ public class Main {
         System.out.printf("Total Lost Revenue: $%.2f%n", totalDiscountAmount);
         }
 
+        for(Product product : inventory) {
+            
+        }
+
     }
 }
