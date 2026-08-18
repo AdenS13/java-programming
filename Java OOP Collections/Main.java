@@ -4,9 +4,9 @@ public class Main {
 
     public static void main(String[] args) {
         Product eggs = new Product("Eggs", 9.99, 12);
-        Product milk = new Product("Milk", 4.99, 1);
+        Product milk = new Product("Milk", 244.99, 19);
         Product cereal = new Product("Cereal", 7.99, 1);
-        Product diaper = new Product("Diaper", 21.99, 40);
+        Product diaper = new Product("Diaper", 21.99, 1000);
 
         ArrayList<Product> inventory = new ArrayList<>();
         inventory.add(eggs);
@@ -28,6 +28,12 @@ public class Main {
         double priorityScore = 0;
         Product discountedProduct = null;
         double invValue = 0;
+        Product bestBulkPurchase = null;
+        double restockCost = 0;
+        int bulkAmount = 0;
+        double discountAmount = 0;
+        double totalDiscountAmount = 0;
+        Product bestClearanceDiscount = null;
 
         for(Product product : inventory) {
             System.out.println(product.getName() + " - $" + product.getPrice() + " - " + product.getQuantity() + " in stock");
@@ -137,6 +143,57 @@ public class Main {
             System.out.println("Price: $" + discountedProduct.getPrice());
             System.out.println("Quantity: " + discountedProduct.getQuantity());
             System.out.printf("Inventory value: $%.2f%n", invValue);
+        }
+
+        for(Product product : inventory) {
+            int currentBulkAmount = 20 - product.getQuantity();
+            double currentRestockCost = currentBulkAmount * product.getPrice();
+                if(product.getQuantity() < 10 && product.getPrice() >= 15) {
+                    if(bestBulkPurchase == null) {
+                        bulkAmount = currentBulkAmount;
+                        restockCost = currentRestockCost;
+                        bestBulkPurchase = product;
+                } else if(currentRestockCost < restockCost) {
+                        bulkAmount = currentBulkAmount;
+                        restockCost = currentRestockCost;
+                        bestBulkPurchase = product;
+                }
+            }
+        }
+
+        if(bestBulkPurchase == null) {
+            System.out.println("No products qualify for bulk purchase.");
+        } else {
+            System.out.println("BEST BULK PURCHASE: " + bestBulkPurchase.getName());
+            System.out.println("Current Quantity: " + bestBulkPurchase.getQuantity());
+            System.out.println("Units to Purchase: " + bulkAmount);
+            System.out.printf("Total Restock Cost: $%.2f%n", restockCost);
+        }
+
+        for(Product product : inventory) {
+            if(product.getQuantity() >= 8 && product.getPrice() >= 10) {
+                double currentDiscount = product.getPrice() * 0.2;
+                double currentLostRev = currentDiscount * product.getQuantity();
+                if(bestClearanceDiscount == null) {
+                    discountAmount = currentDiscount;
+                    totalDiscountAmount = currentLostRev;
+                    bestClearanceDiscount = product;
+                } else if(totalDiscountAmount < currentLostRev) {
+                    discountAmount = currentDiscount;
+                    totalDiscountAmount = currentLostRev;
+                    bestClearanceDiscount = product;
+                }
+            }
+        }
+
+        if(bestClearanceDiscount == null) {
+            System.out.println("No products qualify for the discount");
+        } else {
+        System.out.println("BIGGEST DISCOUNT IMPACT: " + bestClearanceDiscount.getName());
+        System.out.println("Original Price: $" + bestClearanceDiscount.getPrice());
+        System.out.println("Quantity: " + bestClearanceDiscount.getQuantity());
+        System.out.printf("Discount Per Unit: $%.2f%n", discountAmount);
+        System.out.printf("Total Lost Revenue: $%.2f%n", totalDiscountAmount);
         }
 
     }
