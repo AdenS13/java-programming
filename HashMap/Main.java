@@ -136,6 +136,35 @@ public class Main {
 
         System.out.println(prices);
 
+        inventory.put("Keyboard", 12);
+        inventory.put("Mouse", 7);
+        inventory.put("Monitor", 4);
+        inventory.put("Headphones", 15);
+        inventory.put("Webcam", 6);
+
+        String highestProduct = "";
+        int highestQua = 0;
+
+        for (Map.Entry<String, Integer> entry : inventory.entrySet()) {
+            if(highestProduct == null) {
+                highestQua = entry.getValue();
+                highestProduct = entry.getKey();
+            } else if(highestQua < entry.getValue()) {
+                highestQua = entry.getValue();
+                highestProduct = entry.getKey();
+            }
+        }
+
+        HashMap<String, String> departments = new HashMap<>();
+
+        departments.put("Aden", "Tech");
+        departments.put("Sarah", "Finance");
+        departments.put("Aden", "Operations");
+
+        String employeeName = "Jessica";
+
+        System.out.println(employeeName + " - " + departments.getOrDefault(employeeName, "Unassigned"));
+
 
     }
 
