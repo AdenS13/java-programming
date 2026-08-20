@@ -165,6 +165,50 @@ public class Main {
 
         System.out.println(employeeName + " - " + departments.getOrDefault(employeeName, "Unassigned"));
 
+        HashMap<String, Integer> orderInventory = new HashMap<>();
+
+        orderInventory.put("Footballs", 24);
+        orderInventory.put("Basketballs", 16);
+        orderInventory.put("Futbols", 3);
+        orderInventory.put("Baseballs", 75);
+        orderInventory.put("Gloves", 8);
+
+        String orderedProduct = "Baseballs";
+        int orderedQuantity = 90;
+
+        if(orderInventory.containsKey(orderedProduct)) {
+            int currentQuantity = orderInventory.get(orderedProduct);
+            if(currentQuantity >= orderedQuantity) {
+                orderInventory.put(orderedProduct, currentQuantity - orderedQuantity);
+                System.out.println("Order Complete.");
+            } else {
+                System.out.println("Not enough product for order.");
+            }
+        } else {
+            System.out.println("Product not found.");
+        }
+
+        HashMap<String, Double> prizes = new HashMap<>();
+
+        prizes.put("Bear", 1.23);
+        prizes.put("Turtle", 7.53);
+        prizes.put("Bunny", 4.99);
+        prizes.put("Elephant", 10.23);
+        prizes.put("Tiger", 3.79);
+
+        String productToUpdate = "Bear";
+        double priceIncrease = 5.00;
+
+        if(prizes.containsKey(productToUpdate)) {
+            double currentPrice = prizes.get(productToUpdate) + priceIncrease;
+            prizes.put(productToUpdate, currentPrice );
+            System.out.println("Price Updated!");
+            System.out.printf("Old price: $%.2f%n", (prizes.get(productToUpdate) - priceIncrease));
+            System.out.println("New price: $" + prizes.get(productToUpdate));
+        } else {
+            System.out.println("Product not found.");
+        }
+
 
     }
 
