@@ -71,6 +71,14 @@ public class Main {
             System.out.println("New Quantity: " + foundProductToRestock.getQuantity());
         }
 
+        int totalUnitsSold = 0;
+
+        System.out.println("----- SALES REPORT -----");
+        for(Map.Entry<String, Integer> sale : sales.entrySet()) {
+            totalUnitsSold += sale.getValue();
+            System.out.println(sale.getKey() + ": " + sale.getValue() + " sold");
+        }
+
 
 
 
